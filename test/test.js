@@ -192,6 +192,22 @@ var tests = {
   
     if(node.element.nextSibling.nextSibling != tree.find('node_2').element)
       log("after insertBefore node.element.nextSibling.nextSibling != tree.find('node_2').element, instead it is: " + node.element.nextSibling.nextSibling.id)
+  },
+//lame test, why does it only return true when its a string? i dont see why its coercing.
+  testSerialize: function() {
+	if(tree.serialize() != "-1,1,21,11,111,112,113,12,22,13,2") {
+		log('tree.serialize is not correct, but is: ' + tree.serialize());
+	}
+	
+	var node = tree.find('node_2');
+	var sibling = tree.find('node_111');
+   	var parent = tree.find('node_11');
+
+	parent.insertBefore(node, sibling);
+	
+	if(tree.serialize() != "-1,1,21,11,2,111,112,113,12,22,13") {
+		log('tree.serialize is not correct after movement, but is: ' + tree.serialize());
+	}
   }
 }
 
